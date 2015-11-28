@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
   
+  resources :establishments
+  resources :companies
+
   root 'welcome#index'
+  
+  get 'welcome/index'
+  get 'welcome/login_company'
+  get 'welcome/login_establishment'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
