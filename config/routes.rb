@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   
   resources :establishments
-  resources :companies
+  resources :companies, except: [:new, :edit]
+  
+  post 'companies/login_company'
+  post 'establishments/login_establishment'
 
   root 'welcome#index'
   
   get 'welcome/index'
-  get 'welcome/login_company'
-  get 'welcome/login_establishment'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
