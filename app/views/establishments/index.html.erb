@@ -1,2 +1,17 @@
-<h1>Establishments#index</h1>
-<p>Find me in app/views/establishments/index.html.erb</p>
+<h1>Bienvenido!, <%= @establishment["name"] %></h1>
+
+<h3>Datos</h3>
+<table border="1" style="width:100%">
+  <tr>
+    <th>Compañia</th>
+    <th>Dirección</th>
+    <th>Correo</th>
+    <th>último inicio de sesión</th>
+  </tr>
+  <tr>
+    <td><%= @establishment["name"] %></td>
+    <td><%= @establishment["address"] %></td>
+    <td><%= @establishment["email"] %></td>
+    <td><%= @establishment["updated_at"] %></td>
+  </tr>
+</table>
