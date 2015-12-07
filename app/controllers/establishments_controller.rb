@@ -17,6 +17,10 @@ class EstablishmentsController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  def index
+    @establishment = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+  end
+
   def new
   end
 
@@ -32,10 +36,10 @@ class EstablishmentsController < ApplicationController
   def destroy
   end
 
-  def index
-    @establishment = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+  def show
   end
 
-  def show
+  def containers
+    @containers = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/containers', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 end

@@ -16,6 +16,10 @@ class CompaniesController < ApplicationController
 
     redirect_to :action => 'index'
   end
+  
+  def index
+    @company = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+  end
 
   def new
   end
@@ -30,10 +34,6 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
-  end
-
-  def index
-    @company = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 
   def show
