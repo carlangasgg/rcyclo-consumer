@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  get 'welcome/index'
-
   resources :establishments, except: :show
   resources :companies, except: :show
 
