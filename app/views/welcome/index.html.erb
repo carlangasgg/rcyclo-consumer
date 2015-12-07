@@ -1,4 +1,4 @@
-<% if @establishment_signed_in.to_s == "false" %>
+<% if @company_signed_in.to_s == "false" %>
   <p><b>Login de compañias</b></p>
 
   <%= form_tag(controller: "companies", action: "login", method: "post") do %>
