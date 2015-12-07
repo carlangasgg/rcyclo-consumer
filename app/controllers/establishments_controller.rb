@@ -1,5 +1,8 @@
+require 'httparty'
+require 'json'
+
 class EstablishmentsController < ApplicationController
-  def login_establishment
+  def login
     email = params[:email]
     password = params[:password]
 

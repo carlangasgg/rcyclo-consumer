@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 
 class CompaniesController < ApplicationController
-  def login_company
+  def login
     email = params[:email]
     password = params[:password]
 
@@ -37,5 +37,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
+  end
+
+  def containers
+    @containers = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/containers', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 end

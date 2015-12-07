@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  resources :establishments
-  resources :companies
+  resources :establishments, except: :show
+  resources :companies, except: :show
 
-  post 'companies/login_company'
-  post 'establishments/login_establishment'
+  post 'companies/login'
+  get 'companies/containers'
+
+  post 'establishments/login'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

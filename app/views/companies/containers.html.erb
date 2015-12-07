@@ -1,0 +1,26 @@
+<table style="width:100%">
+  <tr>
+    <td><%= link_to "Dashboard", companies_path %></td>
+    <td><%=  %></td>
+    <td><%=  %></td>
+    <td><%=  %></td>
+  </tr>
+</table>
+
+<h3>Contenedores</h3>
+<table border="1" style="width:100%">
+  <tr>
+    <th>@containers</th>
+    <th>Dirección</th>
+    <th>Descripción</th>
+    <th>Fecha última modificación</th>
+  </tr>
+  <% @containers.each do |cont| %>
+  <tr>
+    <td><%= cont["title"] %></td>
+    <td><%= cont["address"] %></td>
+    <td><%= cont["description"] %></td>
+    <td><%= cont["updated_at"] %></td>
+  </tr>
+  <% end %>
+</table>
