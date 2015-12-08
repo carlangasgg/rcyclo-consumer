@@ -1,0 +1,24 @@
+<table style="width:100%">
+  <tr>
+    <td><%= link_to "Dashboard", companies_path %></td>
+    <td><%= link_to "Contenedores", companies_containers_path %></td>
+    <td><%=  %></td>
+    <td><%=  %></td>
+  </tr>
+</table>
+
+<h3>Instituciones</h3>
+<table border="1" style="width:100%">
+  <tr>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Dirección</th>
+  </tr>
+  <% @establishments.each do |est| %>
+  <tr>
+    <td><%= est["name"] %></td>
+    <td><%= est["email"] %></td>
+    <td><%= est["address"] %></td>
+  </tr>
+  <% end %>
+</table>
