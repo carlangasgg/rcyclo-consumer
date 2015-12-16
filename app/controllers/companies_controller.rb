@@ -44,6 +44,10 @@ class CompaniesController < ApplicationController
   end
 
   def request_container
-    @establishments = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/all', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    @waste_types = HTTParty.get('https://api-rcyclo.herokuapp.com/waste_types/all', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+  end
+
+  def request_container_choose_establishment
+    @establishments = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/by_waste_type', :body => {:waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 end

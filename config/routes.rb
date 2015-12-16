@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'companies/login'
   get 'companies/containers'
   get 'companies/request_container'
+  get 'companies/request_container_choose_establishment'
 
   post 'establishments/login'
   get 'establishments/containers'

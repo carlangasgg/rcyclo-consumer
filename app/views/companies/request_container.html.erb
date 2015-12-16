@@ -7,18 +7,18 @@
   </tr>
 </table>
 
-<h3>Instituciones</h3>
+<h3>Tipos de desechos</h3>
 <table border="1" style="width:100%">
   <tr>
     <th>Nombre</th>
-    <th>Email</th>
-    <th>Dirección</th>
+    <th>Descripción</th>
+    <th>Solicitar</th>
   </tr>
-  <% @establishments.each do |est| %>
+  <% @waste_types.each do |wt| %>
   <tr>
-    <td><%= est["name"] %></td>
-    <td><%= est["email"] %></td>
-    <td><%= est["address"] %></td>
+    <td><%= wt["name"] %></td>
+    <td><%= wt["description"] %></td>
+    <td><%= link_to "Continuar", companies_request_container_choose_establishment_path(:waste_type_id => wt["id"]) %></td>
   </tr>
   <% end %>
 </table>
