@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  resources :establishments, except: :show
-  resources :companies, except: :show
+  resources :establishments, except: [:show, :index]
+  resources :companies, except: [:show, :index]
 
+  get 'companies/index'
+  get 'companies/sign_in'
   post 'companies/login'
   get 'companies/containers'
   get 'companies/request_container'
   get 'companies/request_container_choose_establishment'
 
+  get 'establishments/index'
+  get 'establishments/sign_in'
   post 'establishments/login'
   get 'establishments/containers'
 

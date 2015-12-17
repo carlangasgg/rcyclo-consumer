@@ -1,30 +1,88 @@
-<p><b>Login de compañias</b></p>
+<% if false %>
 
-<%= form_tag(controller: "companies", action: "login", method: "post") do %>
-  <p>
-    <%= label_tag(:email, "Email:") %>
-    <%= text_field_tag(:email) %>
-  </p>
-  <p>
-    <%= label_tag(:password, "Password:") %>
-    <%= password_field_tag(:password) %>
-  </p>
+<%= link_to "log companies", companies_sign_in_path %>
 
-  <%= submit_tag("Login") %>
+<%= link_to "log establishments", establishments_sign_in_path %>
+
 <% end %>
 
-<p><b>Login de instituciones</b></p>
+<div class="container-full">
 
-<%= form_tag(controller: "establishments", action: "login", method: "post") do %>
-  <p>
-    <%= label_tag(:email, "Email:") %>
-    <%= text_field_tag(:email) %>
-  </p>
+      <div class="row">
 
-  <p>
-    <%= label_tag(:password, "Password:") %>
-    <%= password_field_tag(:password) %>
-  </p>
+        <div class="col-lg-12 text-center v-center">
 
-  <%= submit_tag("Login") %>
-<% end %>
+          <h1>Hello Landing</h1>
+          <p class="lead">A sign-up page example for Bootstrap 3</p>
+
+          <br>
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-2"><%= link_to "Empresa", companies_sign_in_path, class: "	btn btn-primary btn-lg btn-block" %></div>
+              <div class="col-md-2"><%= link_to "Institución", establishments_sign_in_path, class: "btn btn-primary btn-lg btn-block" %></div>
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /row -->
+
+  	  <div class="row">
+
+        <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
+          <a href="#"><i class="icon-google-plus"></i></a> <a href="#"><i class="icon-facebook"></i></a>  <a href="#"><i class="icon-twitter"></i></a> <a href="#"><i class="icon-github"></i></a> <a href="#"><i class="icon-pinterest"></i></a>
+        </div>
+
+      </div>
+
+  	<br><br><br><br><br>
+
+</div> <!-- /container full -->
+
+<div class="container">
+
+  	<hr>
+
+  	<div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3>Hello.</h3></div>
+            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+            Aliquam in felis sit amet augue.
+            </div>
+          </div>
+        </div>
+      	<div class="col-md-4">
+        	<div class="panel panel-default">
+            <div class="panel-heading"><h3>Hello.</h3></div>
+            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+            Aliquam in felis sit amet augue.
+            </div>
+          </div>
+        </div>
+      	<div class="col-md-4">
+        	<div class="panel panel-default">
+            <div class="panel-heading"><h3>Hello.</h3></div>
+            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+            Aliquam in felis sit amet augue.
+            </div>
+          </div>
+        </div>
+    </div>
+
+	<div class="row">
+        <div class="col-lg-12">
+        <br><br>
+          <p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
+        <br><br>
+        </div>
+    </div>
+</div>

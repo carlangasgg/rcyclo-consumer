@@ -2,6 +2,10 @@ require 'httparty'
 require 'json'
 
 class CompaniesController < ApplicationController
+  def sign_in
+
+  end
+  
   def login
     email = params[:email]
     password = params[:password]
