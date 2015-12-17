@@ -1,3 +1,5 @@
+<% if false %>
+
 <table style="width:100%">
   <tr>
     <td><%= link_to "Dashboard", companies_path %></td>
@@ -28,3 +30,111 @@
 <p>
   <%= link_to "Solicitar un contenedor", companies_request_container_path %>
 </p>
+
+<% end %>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <a class="navbar-brand" href="#">Brand</a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li><a href="#">Left</a></li>
+        <li><a href="#about">Left</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#about">Right</a></li>
+      <li><a href="#contact">Right</a></li>
+    </ul>
+  </div>
+</nav>
+
+<hr>
+<div class="container">
+    <div class="row">
+  		<div class="col-sm-12"><h1>Contenedores</h1></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Opciones</div>
+            <div class="panel-body"><%= link_to "Solicitar un contenedor", companies_request_container_path %></div>
+          </div>
+
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Resumen</i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Totales</strong></span> <%= @containers.count %></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Vacios</strong></span> 1</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Medios</strong></span> 0</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Llenos</strong></span> 1</li>
+          </ul>
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#home" data-toggle="tab">Activos</a></li>
+            <li><a href="#messages" data-toggle="tab">En espera</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Título</th>
+                      <th>Dirección</th>
+                      <th>Descripción</th>
+                      <th>Última modificación</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <% @containers.each_with_index do |cont, index| %>
+                      <tr>
+                        <td><%= index + 1 %> </td>
+                        <td><%= cont["title"] %></td>
+                        <td><%= cont["address"] %></td>
+                        <td><%= cont["description"] %></td>
+                        <td><%= cont["updated_at"] %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div><!--/table-resp-->
+
+             </div><!--/tab-pane-->
+             <div class="tab-pane" id="messages">
+
+               <h2></h2>
+
+               <ul class="list-group">
+                  <li class="list-group-item text-muted">Inbox</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+
+                </ul>
+
+             </div><!--/tab-pane-->
+
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+
+    </div><!--/row-->
