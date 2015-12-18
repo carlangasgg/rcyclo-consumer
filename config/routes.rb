@@ -6,14 +6,16 @@ Rails.application.routes.draw do
 
   get 'companies/index'
   get 'companies/sign_in'
-  post 'companies/login'
+  post 'companies/log_in'
+  get 'companies/log_out'
   get 'companies/containers'
   get 'companies/request_container'
   get 'companies/request_container_choose_establishment'
 
   get 'establishments/index'
   get 'establishments/sign_in'
-  post 'establishments/login'
+  post 'establishments/log_in'
+  get 'establishments/log_out'
   get 'establishments/containers'
 
   # The priority is based upon order of creation: first created -> highest priority.
