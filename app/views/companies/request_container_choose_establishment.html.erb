@@ -35,7 +35,6 @@
     <th>Dirección</th>
     <th>Correo</th>
     <th>Solicitar</th>
-    <th>Datos</th>
   </tr>
   <% @data["establishments"].each do |est| %>
   <tr>
@@ -43,7 +42,6 @@
     <td><%= est["address"] %></td>
     <td><%= est["email"] %></td>
     <td><%= link_to "Continuar", companies_request_container_last_step_path(:current_company_id => @data["current_company"]["id"], :establishment_id => est["id"], :waste_type_id => @data["waste_type_id"]) %></td>
-    <td><%= @data["current_company"]["id"] %> <%= est["id"] %> <%= @data["waste_type_id"] %></td>
   </tr>
   <% end %>
 </table>

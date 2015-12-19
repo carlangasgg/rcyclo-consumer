@@ -25,6 +25,10 @@ class EstablishmentsController < ApplicationController
   def log_out
     HTTParty.delete('https://api-rcyclo.herokuapp.com/establishment_auth/sign_out', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    @@access_token = nil
+    @@client = nil
+    @@uid = nil
+
     redirect_to controller: 'welcome', action: 'index'
   end
 
@@ -59,8 +63,6 @@ class EstablishmentsController < ApplicationController
 
     if defined? @@access_token and defined? @@client and defined? @@uid and @@access_token and @@client and @@uid
       establishment_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
-    else
-      establishment_signed_in = false
     end
 
     unless establishment_signed_in
