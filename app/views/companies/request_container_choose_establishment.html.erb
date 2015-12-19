@@ -34,14 +34,16 @@
     <th>Compañia</th>
     <th>Dirección</th>
     <th>Correo</th>
-    <th>último inicio de sesión</th>
+    <th>Solicitar</th>
+    <th>Datos</th>
   </tr>
-  <% @establishments.each do |est| %>
+  <% @establishments["establishments"].each do |est| %>
   <tr>
     <td><%= est["name"] %></td>
     <td><%= est["address"] %></td>
     <td><%= est["email"] %></td>
-    <td><%= est["updated_at"] %></td>
+    <td><%= link_to "Continuar", companies_request_container_last_step_path(:current_company_id => @establishments["current_company"]["id"], :establishment_id => est["id"], :waste_type_id => @establishments["waste_type_id"]) %></td>
+    <td><%= @establishments["current_company"]["id"] %> <%= est["id"] %> <%= @establishments["waste_type_id"] %></td>
   </tr>
   <% end %>
 </table>

@@ -62,6 +62,12 @@ class CompaniesController < ApplicationController
     @establishments = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/by_waste_type', :body => {:waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 
+  def request_container_last_step
+    request = HTTParty.get('https://api-rcyclo.herokuapp.com/containers/create_by_company_request', :body => {:current_company_id => params[:current_company_id], :establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to :action => 'containers', request: request
+  end
+
   def company_only
     if defined? @@access_token and defined? @@client and defined? @@uid
       company_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'companies/containers'
   get 'companies/request_container'
   get 'companies/request_container_choose_establishment'
+  get 'companies/request_container_last_step'
 
   get 'establishments/index'
   get 'establishments/sign_in'
