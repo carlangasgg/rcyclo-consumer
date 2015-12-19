@@ -37,13 +37,13 @@
     <th>Solicitar</th>
     <th>Datos</th>
   </tr>
-  <% @establishments["establishments"].each do |est| %>
+  <% @data["establishments"].each do |est| %>
   <tr>
     <td><%= est["name"] %></td>
     <td><%= est["address"] %></td>
     <td><%= est["email"] %></td>
-    <td><%= link_to "Continuar", companies_request_container_last_step_path(:current_company_id => @establishments["current_company"]["id"], :establishment_id => est["id"], :waste_type_id => @establishments["waste_type_id"]) %></td>
-    <td><%= @establishments["current_company"]["id"] %> <%= est["id"] %> <%= @establishments["waste_type_id"] %></td>
+    <td><%= link_to "Continuar", companies_request_container_last_step_path(:current_company_id => @data["current_company"]["id"], :establishment_id => est["id"], :waste_type_id => @data["waste_type_id"]) %></td>
+    <td><%= @data["current_company"]["id"] %> <%= est["id"] %> <%= @data["waste_type_id"] %></td>
   </tr>
   <% end %>
 </table>
