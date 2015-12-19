@@ -55,15 +55,15 @@ class CompaniesController < ApplicationController
   end
 
   def request_container
-    @waste_types = HTTParty.get('https://api-rcyclo.herokuapp.com/waste_types/all', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    @waste_types = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/waste_types_all', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 
   def request_container_choose_establishment
-    @establishments = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/by_waste_type', :body => {:waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    @establishments = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/establishments_by_waste_type', :body => {:waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 
   def request_container_last_step
-    request = HTTParty.get('https://api-rcyclo.herokuapp.com/containers/create_by_company_request', :body => {:current_company_id => params[:current_company_id], :establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    request = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/create_container_by_company_request', :body => {:current_company_id => params[:current_company_id], :establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
     redirect_to :action => 'containers', request: request
   end
