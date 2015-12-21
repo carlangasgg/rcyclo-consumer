@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post 'establishments/log_in'
   get 'establishments/log_out'
   get 'establishments/containers'
+  get 'establishments/accept_container_request'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

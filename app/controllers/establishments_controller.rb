@@ -58,6 +58,12 @@ class EstablishmentsController < ApplicationController
     @data = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/containers', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 
+  def accept_container_request
+    HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/accept_container_request', :body => {:container_id => params[:container_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to :action => 'containers'
+  end
+
   def establishment_only
     establishment_signed_in = false
 

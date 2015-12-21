@@ -81,7 +81,7 @@
                   <th>#</th>
                   <th>Título</th>
                   <th>Dirección</th>
-                  <th>Última modificación</th>
+                  <th>Aceptar solicitud</th>
                 </tr>
               </thead>
               <tbody id="items">
@@ -90,7 +90,7 @@
                   <td><%= index + 1 %> </td>
                   <td><%= cont["title"] %></td>
                   <td><%= cont["address"] %></td>
-                  <td><%= cont["updated_at"] %></td>
+                  <td><%= link_to "Aceptar", establishments_accept_container_request_path(:container_id => cont["id"]) %></td>
                 </tr>
                 <% end %>
               </tbody>

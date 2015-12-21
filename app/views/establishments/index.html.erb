@@ -6,42 +6,96 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="#">Brand</a>
+  <a class="navbar-brand" href="/">Home</a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li>
+      <li><%= link_to "Perfil", establishments_index_path %></li>
+      <li><%= link_to "Contenedores", establishments_containers_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Right</a></li>
+      <li><p class="navbar-text">Conectado como <%= @establishment["email"] %></p></li>
       <li><%= link_to "Log out", establishments_log_out_path %></li>
     </ul>
   </div>
 </nav>
 
-<h1>Bienvenido!, <%= @establishment["name"] %></h1>
+<div class="container">
+  <div class="row">
 
-<table style="width:100%">
-  <tr>
-    <td><%= link_to "Contenedores", establishments_containers_path %></td>
-    <td><%=  %></td>
-    <td><%=  %></td>
-    <td><%=  %></td>
-  </tr>
-</table>
+    <!-- main right col -->
+    <div class="column col-sm-12" id="main">
+      <div class="padding">
+        <div class="full col-sm-9">
 
-<h3>Datos</h3>
-<table border="1" style="width:100%">
-  <tr>
-    <th>Compañia</th>
-    <th>Dirección</th>
-    <th>Correo</th>
-    <th>último inicio de sesión</th>
-  </tr>
-  <tr>
-    <td><%= @establishment["name"] %></td>
-    <td><%= @establishment["address"] %></td>
-    <td><%= @establishment["email"] %></td>
-    <td><%= @establishment["updated_at"] %></td>
-  </tr>
-</table>
+          <!-- content -->
+          <div class="row">
+
+            <!-- main col left -->
+            <div class="col-sm-4">
+
+              <div class="panel panel-default">
+                <div class="panel-thumbnail"><img src="http://bligoo.com/media/users/0/38747/images/LOGO%20ORIGINAL_trascender_nuevo.jpg" class="img-responsive"></div>
+                <div class="panel-body">
+                  <p class="lead"><%= @establishment["name"] %></p>
+
+                  <hr>
+
+                  <p>Se encuentra en <%= @establishment["address"] %></p>
+
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><h4>Bootstrap Examples</h4></div>
+                <div class="panel-body">
+                  <div class="list-group">
+                    <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
+                    <a href="http://bootply.com/tagged/datetime" class="list-group-item">Datetime Examples</a>
+                    <a href="http://bootply.com/tagged/datatable" class="list-group-item">Data Grids</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- main col right -->
+            <div class="col-sm-8">
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Bootply Editor &amp; Code Library</h4></div>
+                <div class="panel-body">
+                  <p><img src="//placehold.it/150x150" class="img-circle pull-right"> <a href="#">The Bootstrap Playground</a></p>
+                  <div class="clearfix"></div>
+
+                  <hr>
+
+                  <p>Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.</p>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Portlet Heading</h4></div>
+                <div class="panel-body">
+                  <ul class="list-group">
+                    <li class="list-group-item">Modals</li>
+                    <li class="list-group-item">Sliders / Carousel</li>
+                    <li class="list-group-item">Thumbnails</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <hr>
+
+          <h4 class="text-center"><a href="http://bootply.com/96266" target="ext">Download this Template @Bootply</a></h4>
+
+          <hr>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
