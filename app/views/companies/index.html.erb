@@ -6,14 +6,14 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="#">Brand</a>
+  <a class="navbar-brand" href="/">Home</a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li>
+      <li><%= link_to "Perfil", companies_index_path %></li>
+      <li><%= link_to "Contenedores", companies_containers_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Right</a></li>
+      <li><p class="navbar-text">Conectado como <%= @company["email"] %></p></li>
       <li><%= link_to "Log out", companies_log_out_path %></li>
     </ul>
   </div>
@@ -40,12 +40,8 @@
 
                   <hr>
 
-                  <p>Conectado como <%= @company["email"] %></p>
                   <p>Se encuentra en <%= @company["address"] %></p>
 
-                  <hr>
-
-                  <p><%= link_to "Ver contenedores", companies_containers_path %></p>
                 </div>
               </div>
 

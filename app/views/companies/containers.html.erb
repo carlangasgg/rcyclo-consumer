@@ -6,14 +6,14 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="#">Brand</a>
+  <a class="navbar-brand" href="/">Home</a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li>
+      <li><%= link_to "Perfil", companies_index_path %></li>
+      <li><%= link_to "Contenedores", companies_containers_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Right</a></li>
+      <li><p class="navbar-text">Conectado como <%= @data["current_company"]["email"] %></p></li>
       <li><%= link_to "Log out", companies_log_out_path %></li>
     </ul>
   </div>
@@ -32,9 +32,9 @@
       <ul class="list-group">
         <li class="list-group-item text-muted">Resumen</i></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Totales</strong></span> <%= @data["containers_empty"] + @data["containers_half"] + @data["containers_full"] %></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Vacios</strong></span> <%= @data["containers_empty"] %></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Medios</strong></span> <%= @data["containers_half"] %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Llenos</strong></span> <%= @data["containers_full"] %></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Medios</strong></span> <%= @data["containers_half"] %></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Vacios</strong></span> <%= @data["containers_empty"] %></li>
       </ul>
 
       <%= link_to "Solicitar un contenedor", companies_request_container_path, class: "	btn btn-primary btn-lg btn-block" %>
@@ -60,17 +60,15 @@
                   <th>Última modificación</th>
                 </tr>
               </thead>
-              <tbody id="items">
-                <% @data["containers"].each_with_index do |cont, index| %>
-                <tr>
-                  <td><%= index + 1 %> </td>
-                  <td><%= cont["title"] %></td>
-                  <td><%= cont["address"] %></td>
-                  <td><%= cont["description"] %></td>
-                  <td><%= cont["updated_at"] %></td>
-                </tr>
-                <% end %>
-              </tbody>
+              <% @data["containers"].each_with_index do |cont, index| %>
+              <tr>
+                <td><%= index + 1 %> </td>
+                <td><%= cont["title"] %></td>
+                <td><%= cont["address"] %></td>
+                <td><%= cont["description"] %></td>
+                <td><%= cont["updated_at"] %></td>
+              </tr>
+              <% end %>
             </table>
           </div>
         </div>
@@ -86,16 +84,14 @@
                   <th>Última modificación</th>
                 </tr>
               </thead>
-              <tbody id="items">
-                <% @data["containers_waiting"].each_with_index do |cont, index| %>
-                <tr>
-                  <td><%= index + 1 %> </td>
-                  <td><%= cont["title"] %></td>
-                  <td><%= cont["address"] %></td>
-                  <td><%= cont["updated_at"] %></td>
-                </tr>
-                <% end %>
-              </tbody>
+              <% @data["containers_waiting"].each_with_index do |cont, index| %>
+              <tr>
+                <td><%= index + 1 %> </td>
+                <td><%= cont["title"] %></td>
+                <td><%= cont["address"] %></td>
+                <td><%= cont["updated_at"] %></td>
+              </tr>
+              <% end %>
             </table>
           </div>
         </div>

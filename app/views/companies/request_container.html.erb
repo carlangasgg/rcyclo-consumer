@@ -6,40 +6,40 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="#">Brand</a>
+  <a class="navbar-brand" href="/">Home</a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li>
+      <li><%= link_to "Perfil", companies_index_path %></li>
+      <li><%= link_to "Contenedores", companies_containers_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Right</a></li>
+      <li><p class="navbar-text">Conectado como <%= @data["current_company"]["email"] %></p></li>
       <li><%= link_to "Log out", companies_log_out_path %></li>
     </ul>
   </div>
 </nav>
 
-<table style="width:100%">
-  <tr>
-    <td><%= link_to "Dashboard", companies_path %></td>
-    <td><%= link_to "Contenedores", companies_containers_path %></td>
-    <td><%=  %></td>
-    <td><%=  %></td>
-  </tr>
-</table>
+<div class="container">
+  <h1>Tipos de desechos</h1>
 
-<h3>Tipos de desechos</h3>
-<table border="1" style="width:100%">
-  <tr>
-    <th>Nombre</th>
-    <th>Descripción</th>
-    <th>Solicitar</th>
-  </tr>
-  <% @waste_types.each do |wt| %>
-  <tr>
-    <td><%= wt["name"] %></td>
-    <td><%= wt["description"] %></td>
-    <td><%= link_to "Continuar", companies_request_container_choose_establishment_path(:waste_type_id => wt["id"]) %></td>
-  </tr>
-  <% end %>
-</table>
+  <hr>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Solicitar</th>
+        </tr>
+      </thead>
+      <% @data["waste_types"].each_with_index do |wt, index| %>
+        <tr>
+          <td><%= index + 1 %> </td>
+          <td><%= wt["name"] %></td>
+          <td><%= link_to "Continuar", companies_request_container_choose_establishment_path(:waste_type_id => wt["id"]) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
