@@ -72,6 +72,12 @@ class CompaniesController < ApplicationController
     redirect_to :action => 'containers'
   end
 
+  def update_state_container
+    HTTParty.get('https://api-rcyclo.herokuapp.com/companies/update_state_container', :body => {:container_id => params[:container_id], :status_id => params[:status_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to :action => 'containers'
+  end
+
   def company_only
     company_signed_in = false
 
