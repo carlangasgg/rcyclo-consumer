@@ -13,13 +13,21 @@ class CompaniesController < ApplicationController
 
     result_log_in_company = HTTParty.post('https://api-rcyclo.herokuapp.com/company_auth/sign_in', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    @@uid = result_log_in_company.headers["uid"]
-    @@client = result_log_in_company.headers["client"]
-    @@access_token = result_log_in_company.headers["access-token"]
+    case result_log_in_company.code
+      when 200
+        @@uid = result_log_in_company.headers["uid"]
+        @@client = result_log_in_company.headers["client"]
+        @@access_token = result_log_in_company.headers["access-token"]
 
-    result_validate_log_in_company = HTTParty.get('https://api-rcyclo.herokuapp.com/company_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+        result_validate_log_in_company = HTTParty.get('https://api-rcyclo.herokuapp.com/company_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    redirect_to :action => 'index'
+        redirect_to :action => 'index'
+      else
+        flash[:wrong_credentials] = "Mala combinación de Email y Password"
+
+        redirect_to :action => 'sign_in'
+    end
+
   end
 
   def log_out
