@@ -11,19 +11,19 @@ class EstablishmentsController < ApplicationController
     email = params[:email]
     password = params[:password]
 
-    result_log_in_establishment = HTTParty.post('https://api-rcyclo.herokuapp.com/establishment_auth/sign_in', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    result_log_in = HTTParty.post('https://api-rcyclo.herokuapp.com/establishment_auth/sign_in', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    case result_log_in_establishmen.code
+    case result_log_in.code
       when 200
-        @@uid = result_log_in_establishment.headers["uid"]
-        @@client = result_log_in_establishment.headers["client"]
-        @@access_token = result_log_in_establishment.headers["access-token"]
+        @@uid = result_log_in.headers["uid"]
+        @@client = result_log_in.headers["client"]
+        @@access_token = result_log_in.headers["access-token"]
 
-        result_validate_log_in_establishment = HTTParty.get('https://api-rcyclo.herokuapp.com/establishment_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+        result_validate_log_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishment_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
         redirect_to :action => 'index'
       else
-        flash[:wrong_credentials] = "Mala combinación de Email y Password"
+        flash[:wrong_credentials] = "Mala combinación de email y password."
 
         redirect_to :action => 'sign_in'
       end

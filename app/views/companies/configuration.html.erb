@@ -13,7 +13,7 @@
       <li><%= link_to "Contenedores", companies_containers_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><p class="navbar-text">Conectado como <%= @data["current_company"]["email"] %></p></li>
+      <li><p class="navbar-text">Conectado como <%= @company["email"] %></p></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
@@ -27,30 +27,5 @@
 </nav>
 
 <div class="container">
-  <h1>Instituciones</h1>
-
-  <hr>
-
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Institución</th>
-          <th>Dirección</th>
-          <th>Correo</th>
-          <th>Solicitar</th>
-        </tr>
-      </thead>
-      <% @data["establishments"].each_with_index do |est, index| %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td><%= est["name"] %></td>
-          <td><%= est["address"] %></td>
-          <td><%= est["email"] %></td>
-          <td><%= link_to "Continuar", companies_request_container_last_step_path(:current_company_id => @data["current_company"]["id"], :establishment_id => est["id"], :waste_type_id => @data["waste_type_id"]) %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
+  <%= link_to "Darse de baja", companies_drop_out_path, class: "btn btn-danger btn-lg btn-block", :data => {:confirm => '¿Esta seguro que desea dar de baja su empresa?'} %>
 </div>

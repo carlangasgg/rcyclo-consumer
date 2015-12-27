@@ -11,21 +11,21 @@ class CompaniesController < ApplicationController
     email = params[:email]
     password = params[:password]
 
-    result_log_in_company = HTTParty.post('https://api-rcyclo.herokuapp.com/company_auth/sign_in', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    result_log_in = HTTParty.post('https://api-rcyclo.herokuapp.com/company_auth/sign_in', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    case result_log_in_company.code
+    case result_log_in.code
       when 200
-        @@uid = result_log_in_company.headers["uid"]
-        @@client = result_log_in_company.headers["client"]
-        @@access_token = result_log_in_company.headers["access-token"]
+        @@uid = result_log_in.headers["uid"]
+        @@client = result_log_in.headers["client"]
+        @@access_token = result_log_in.headers["access-token"]
 
-        result_validate_log_in_company = HTTParty.get('https://api-rcyclo.herokuapp.com/company_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+        result_validate_log_in = HTTParty.get('https://api-rcyclo.herokuapp.com/company_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
         redirect_to :action => 'index'
       else
         flash[:wrong_credentials] = "Mala combinación de Email y Password"
 
-        redirect_to :action => 'sign_in'
+        redirect_to action: 'sign_in'
     end
 
   end
@@ -77,13 +77,23 @@ class CompaniesController < ApplicationController
   def request_container_last_step
     HTTParty.get('https://api-rcyclo.herokuapp.com/companies/create_container_by_company_request', :body => {:current_company_id => params[:current_company_id], :establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    redirect_to :action => 'containers'
+    redirect_to action: 'containers'
   end
 
   def update_state_container
     HTTParty.get('https://api-rcyclo.herokuapp.com/companies/update_state_container', :body => {:container_id => params[:container_id], :status_id => params[:status_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    redirect_to :action => 'containers'
+    redirect_to action: 'containers'
+  end
+
+  def configuration
+    @company = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+  end
+
+  def drop_out
+    HTTParty.get('https://api-rcyclo.herokuapp.com/companies/drop_out', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to controller: 'welcome', action: 'index'
   end
 
   def company_only

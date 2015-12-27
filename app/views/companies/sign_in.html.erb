@@ -6,15 +6,12 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="#">Brand</a>
+  <a class="navbar-brand" href="#">R-Cyclo</a>
   <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li>
-    </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Right</a></li>
-      <li><a href="#contact">Right</a></li>
+      <li><a href="#about">Involucrate</a></li>
+      <li><a href="#about">Quiénes somos</a></li>
+      <li><a href="#contact">Contacto</a></li>
     </ul>
   </div>
 </nav>
@@ -24,7 +21,8 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="alert alert-danger">
-        <p class="text-center"><%= flash[:wrong_credentials] %></p>
+          <a class="close" data-dismiss="alert">&times;</a>
+          <strong>¡Error!</strong> <%= flash[:wrong_credentials] %>
       </div>
     </div>
     <div class="col-md-4"></div>

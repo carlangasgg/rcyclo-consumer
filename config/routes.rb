@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'companies/request_container_choose_establishment'
   get 'companies/request_container_last_step'
   get 'companies/update_state_container'
+  get 'companies/configuration'
+  get 'companies/drop_out'
 
   get 'establishments/index'
   get 'establishments/sign_in'
