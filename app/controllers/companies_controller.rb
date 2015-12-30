@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 
 class CompaniesController < ApplicationController
-  before_action :company_only, except: [:sign_in, :log_in]
+  before_action :active_company_only, except: [:sign_in, :log_in]
 
   def sign_in
   end
@@ -94,15 +94,17 @@ class CompaniesController < ApplicationController
     redirect_to controller: 'welcome', action: 'index'
   end
 
-  def company_only
-    company_signed_in = false
-
-    if defined? @@access_token and defined? @@client and defined? @@uid and @@access_token and @@client and @@uid
+  def active_company_only
+    if defined? @@access_token and defined? @@client and defined? @@uid
       company_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
     end
 
-    unless company_signed_in
+    if company_signed_in.nil?
       redirect_to root_path
+    else
+      if company_signed_in["active"] == false
+        HTTParty.get('https://api-rcyclo.herokuapp.com/companies/return_to_rcyclo', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+      end
     end
   end
 end
