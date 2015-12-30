@@ -64,7 +64,6 @@
                   <th>Título</th>
                   <th>Dirección</th>
                   <th>Descripción</th>
-                  <th>Estado</th>
                   <th>Última modificación</th>
                   <th>Modificar estado</th>
                 </tr>
@@ -75,21 +74,26 @@
                 <td><%= cont["title"] %></td>
                 <td><%= cont["address"] %></td>
                 <td><%= cont["description"] %></td>
-                <% case cont["status_id"] when 1 %> <td>Vacío</td>
-                  <% when 2 %> <td>Medio</td>
-                  <% when 3 %> <td>Lleno</td>
-                <% end %>
                 <td><%= cont["updated_at"] %></td>
                 <td>
                   <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      Dropdown
+                      <% case cont["status_id"] when 1 %> Vacío
+                        <% when 2 %> Medio
+                        <% when 3 %> Lleno
+                      <% end %>
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><%= link_to "Vacío", companies_update_state_container_path(:container_id => cont["id"], :status_id => 1) %></li>
-                      <li><%= link_to "Medio", companies_update_state_container_path(:container_id => cont["id"], :status_id => 2) %></li>
-                      <li><%= link_to "Lleno", companies_update_state_container_path(:container_id => cont["id"], :status_id => 3) %></li>
+                      <% unless cont["status_id"] == 1 %>
+                        <li><%= link_to "Vacío", companies_update_state_container_path(:container_id => cont["id"], :status_id => 1) %></li>
+                      <% end %>
+                      <% unless cont["status_id"] == 2 %>
+                        <li><%= link_to "Medio", companies_update_state_container_path(:container_id => cont["id"], :status_id => 2) %></li>
+                      <% end %>
+                      <% unless cont["status_id"] == 3 %>
+                        <li><%= link_to "Lleno", companies_update_state_container_path(:container_id => cont["id"], :status_id => 3) %></li>
+                      <% end %>
                     </ul>
                   </div>
                 </td>

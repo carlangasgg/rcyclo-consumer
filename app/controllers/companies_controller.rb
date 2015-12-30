@@ -19,8 +19,6 @@ class CompaniesController < ApplicationController
         @@client = result_log_in.headers["client"]
         @@access_token = result_log_in.headers["access-token"]
 
-        result_validate_log_in = HTTParty.get('https://api-rcyclo.herokuapp.com/company_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
-
         redirect_to :action => 'index'
       else
         flash[:wrong_credentials] = "Mala combinación de Email y Password"
@@ -75,7 +73,7 @@ class CompaniesController < ApplicationController
   end
 
   def request_container_last_step
-    HTTParty.get('https://api-rcyclo.herokuapp.com/companies/create_container_by_company_request', :body => {:current_company_id => params[:current_company_id], :establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    HTTParty.get('https://api-rcyclo.herokuapp.com/companies/create_container_by_company_request', :body => {:establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
     redirect_to action: 'containers'
   end

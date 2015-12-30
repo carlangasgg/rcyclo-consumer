@@ -19,8 +19,6 @@ class EstablishmentsController < ApplicationController
         @@client = result_log_in.headers["client"]
         @@access_token = result_log_in.headers["access-token"]
 
-        result_validate_log_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishment_auth/validate_token', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
-
         redirect_to :action => 'index'
       else
         flash[:wrong_credentials] = "Mala combinación de email y password."
