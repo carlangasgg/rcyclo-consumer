@@ -67,6 +67,28 @@
                   <td><%= cont["address"] %></td>
                   <td><%= cont["description"] %></td>
                   <td><%= cont["updated_at"] %></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <% case cont["status_id"] when 1 %> Vacío
+                          <% when 2 %> Medio
+                          <% when 3 %> Lleno
+                        <% end %>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <% unless cont["status_id"] == 1 %>
+                          <li><%= link_to "Vacío", establishments_update_state_container_path(:container_id => cont["id"], :status_id => 1) %></li>
+                        <% end %>
+                        <% unless cont["status_id"] == 2 %>
+                          <li><%= link_to "Medio", establishments_update_state_container_path(:container_id => cont["id"], :status_id => 2) %></li>
+                        <% end %>
+                        <% unless cont["status_id"] == 3 %>
+                          <li><%= link_to "Lleno", establishments_update_state_container_path(:container_id => cont["id"], :status_id => 3) %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </td>
                 </tr>
                 <% end %>
               </tbody>
@@ -92,28 +114,7 @@
                   <td><%= cont["title"] %></td>
                   <td><%= cont["address"] %></td>
                   <td><%= link_to "Aceptar", establishments_accept_container_request_path(:container_id => cont["id"]) %></td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <% case cont["status_id"] when 1 %> Vacío
-                          <% when 2 %> Medio
-                          <% when 3 %> Lleno
-                        <% end %>
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <% unless cont["status_id"] == 1 %>
-                          <li><%= link_to "Vacío", establishment_update_state_container_path(:container_id => cont["id"], :status_id => 1) %></li>
-                        <% end %>
-                        <% unless cont["status_id"] == 2 %>
-                          <li><%= link_to "Medio", establishment_update_state_container_path(:container_id => cont["id"], :status_id => 2) %></li>
-                        <% end %>
-                        <% unless cont["status_id"] == 3 %>
-                          <li><%= link_to "Lleno", establishment_update_state_container_path(:container_id => cont["id"], :status_id => 3) %></li>
-                        <% end %>
-                      </ul>
-                    </div>
-                  </td>
+                  
                 </tr>
                 <% end %>
               </tbody>
