@@ -51,6 +51,7 @@ class EstablishmentsController < ApplicationController
   end
 
   def edit
+
   end
 
   def destroy
@@ -80,4 +81,11 @@ class EstablishmentsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def update_state_container
+    HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/update_state_container', :body => {:container_id => params[:container_id], :status_id => params[:status_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to action: 'containers'
+  end
+
 end

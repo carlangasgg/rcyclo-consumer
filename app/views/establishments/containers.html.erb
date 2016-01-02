@@ -56,6 +56,7 @@
                   <th>Dirección</th>
                   <th>Descripción</th>
                   <th>Última modificación</th>
+                  <th>Modificar estado</th>
                 </tr>
               </thead>
               <tbody id="items">
@@ -91,6 +92,28 @@
                   <td><%= cont["title"] %></td>
                   <td><%= cont["address"] %></td>
                   <td><%= link_to "Aceptar", establishments_accept_container_request_path(:container_id => cont["id"]) %></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <% case cont["status_id"] when 1 %> Vacío
+                          <% when 2 %> Medio
+                          <% when 3 %> Lleno
+                        <% end %>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <% unless cont["status_id"] == 1 %>
+                          <li><%= link_to "Vacío", establishment_update_state_container_path(:container_id => cont["id"], :status_id => 1) %></li>
+                        <% end %>
+                        <% unless cont["status_id"] == 2 %>
+                          <li><%= link_to "Medio", establishment_update_state_container_path(:container_id => cont["id"], :status_id => 2) %></li>
+                        <% end %>
+                        <% unless cont["status_id"] == 3 %>
+                          <li><%= link_to "Lleno", establishment_update_state_container_path(:container_id => cont["id"], :status_id => 3) %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </td>
                 </tr>
                 <% end %>
               </tbody>
