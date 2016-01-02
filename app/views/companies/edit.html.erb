@@ -1,2 +1,55 @@
-<h1>Companies#edit</h1>
-<p>Find me in app/views/companies/edit.html.erb</p>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <a class="navbar-brand" href="/">Home</a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+      <li><%= link_to "Perfil", companies_index_path %></li>
+      <li><%= link_to "Contenedores", companies_containers_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><p class="navbar-text">Conectado como <%= @comp["email"] %></p></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to "Configuración", companies_configuration_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Log out", companies_log_out_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+      <form class="form-signin" role="form"></form>
+    <section id="features">
+      <h2 class="form-signin-heading">Modificar datos</h2> <br>
+    <%= form_tag controller: "companies", action: "modify_data", method: "post", :class => "form-signin" do %>
+    </section>
+       <div class="form-group">
+        <%= text_field_tag :name, @comp[:name], class: "form-control", placeholder: "Nombre de la Empresa" %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag :address, @comp[:address], class: "form-control", placeholder: "Dirección" %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag :email, @comp[:email], class: "form-control", placeholder: "Email" %>
+      </div>
+
+      <%= submit_tag "Modificar Datos", class: "btn btn-primary btn-lg btn-block" %>
+        </div>
+      <% end %>
+
+
+  </div>
+</div>

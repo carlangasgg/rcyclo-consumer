@@ -52,6 +52,8 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @comp = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/edit', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
   end
 
   def destroy
@@ -107,4 +109,30 @@ class CompaniesController < ApplicationController
       end
     end
   end
+
+  def modify_data
+    
+    #result_modify_data = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    result_modify_data = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:company=>{:name => params[:name], :address => params[:address], :email=>params[:email]}},:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+
+    case result_modify_data.code
+      when 200
+        @@uid = result_modify_data.headers["uid"]
+        @@client = result_modify_data.headers["client"]
+        @@access_token = result_modify_data.headers["access-token"]
+        flash[:modify_data_success] = "Modificación ingresada. Debe esperar la validación del administrador para la actualización de sus datos."
+        redirect_to :action => 'index'
+
+
+      else
+        flash[:modify_data_error] = "Ocurrio un problema con los datos ingresados"
+
+        redirect_to action: 'edit'
+    end
+
+
+  end
+
+
 end

@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get 'companies/update_state_container'
   get 'companies/configuration'
   get 'companies/drop_out'
+  get 'companies/edit'
+  post 'companies/modify_data'
+
 
   get 'establishments/index'
   get 'establishments/sign_in'
