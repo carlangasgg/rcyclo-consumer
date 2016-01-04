@@ -113,7 +113,11 @@ class CompaniesController < ApplicationController
   def modify_data
     
     #result_modify_data = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:email => email, :password => password}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
-    result_modify_data = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:name => params[:name], :address => params[:address], :email=>params[:email]},:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    
+    result_modify_data = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {"company" =>{:name => params[:name], :address => params[:address], :email=>params[:email]}}.to_json,:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+
+    #result_modify_data = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:name => params[:name], :address => params[:address], :email=>params[:email]},:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
 
     case result_modify_data.code
