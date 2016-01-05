@@ -57,6 +57,7 @@
                   <th>Descripción</th>
                   <th>Última modificación</th>
                   <th>Modificar estado</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="items">
@@ -88,6 +89,10 @@
                         <% end %>
                       </ul>
                     </div>
+                  </td>
+                    <%= link_to 'Eliminar', establishment_delete_container_path(:id_container => cont.id), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-danger btn-sm", method: :post %>
+                  <td>
+
                   </td>
                 </tr>
                 <% end %>

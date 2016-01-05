@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'establishments/containers'
   get 'establishments/accept_container_request'
   get 'establishments/update_state_container'
+  post 'establishments/delete_container'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

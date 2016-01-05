@@ -88,4 +88,14 @@ class EstablishmentsController < ApplicationController
     redirect_to action: 'containers'
   end
 
+  def delete_container
+
+    result_delete_container = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/delete_container', :body => {:id_container => params[:id_container]}.to_json,:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    flash[:container_erased] = "Contenedor eliminado"
+    #CompanyMailer.container_erased_explanation(company, current_establishment).deliver_later
+    redirect_to :action => 'index'
+
+  end
+
 end
