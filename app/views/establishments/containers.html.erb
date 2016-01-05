@@ -90,9 +90,8 @@
                       </ul>
                     </div>
                   </td>
-                    <%= link_to 'Eliminar', establishment_delete_container_path(:id_container => cont.id), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-danger btn-sm", method: :post %>
                   <td>
-
+                    <%= link_to 'Eliminar', establishments_delete_container_path(:id_container => cont["id"]), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-danger btn-sm", method: :post %>
                   </td>
                 </tr>
                 <% end %>
