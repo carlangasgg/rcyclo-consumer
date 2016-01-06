@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+      <li><%#= link_to "Perfil", companies_index_path %></li>
+      <li><%#= link_to "Contenedores", companies_containers_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><p class="navbar-text">Conectado como <%= @admin["email"] %></p></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%#= link_to "Configuración", companies_configuration_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Log out", admins_log_out_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
