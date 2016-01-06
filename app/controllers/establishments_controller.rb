@@ -2,9 +2,18 @@ require 'httparty'
 require 'json'
 
 class EstablishmentsController < ApplicationController
-  before_action :active_establishment_only, except: [:sign_in, :log_in]
+  before_action :active_establishment_only, except: [:sign_in, :log_in, :sign_up, :register]
 
   def sign_in
+  end
+
+  def sign_up
+  end
+
+  def register
+    result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/establishment_auth/', :body => {:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to controller: 'welcome', action: 'index'
   end
 
   def log_in

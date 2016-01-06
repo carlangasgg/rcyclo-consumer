@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'companies/index'
   get 'companies/sign_in'
+  get 'companies/sign_up'
+  post 'companies/register'
   post 'companies/log_in'
   get 'companies/log_out'
   get 'companies/containers'
@@ -16,11 +18,14 @@ Rails.application.routes.draw do
   get 'companies/update_state_container'
   get 'companies/configuration'
   get 'companies/drop_out'
-  get 'companies/edit'
+  post 'companies/edit_data'
+  post 'companies/edit_password'
   post 'companies/modify_data'
 
   get 'establishments/index'
   get 'establishments/sign_in'
+  get 'establishments/sign_up'
+  post 'establishments/register'
   post 'establishments/log_in'
   get 'establishments/log_out'
   get 'establishments/drop_out'
@@ -34,6 +39,7 @@ Rails.application.routes.draw do
 
   get 'admins/index'
   get 'admins/sign_in'
+  get 'admins/sign_up'
   post 'admins/log_in'
   get 'admins/log_out'
   get 'admins/new_company'

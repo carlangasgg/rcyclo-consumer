@@ -26,6 +26,84 @@
   </div>
 </nav>
 
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <% if flash[:updated_data_succes] %>
+    <div class="alert alert-success">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Éxito!</strong> <%= flash[:updated_data_succes] %>
+    </div>
+    <% end %>
+    <% if flash[:updated_data_failure] %>
+    <div class="alert alert-danger">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Error!</strong> <%= flash[:updated_data_failure] %>
+    </div>
+    <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Editar Datos</div>
+      <div class="panel-body">
+        <%= form_tag controller: "establishments", action: "edit_data", method: "post", :class => "form-signin" do %>
+        <div class="form-group">
+          <label>Nombre</label>
+          <%= text_field_tag :name, '', class: "form-control", value: "#{@company["name"]}" %>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <%= text_field_tag :email, '', class: "form-control", value: "#{@company["email"]}" %>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <%= text_field_tag :address, '', class: "form-control", value: "#{@company["address"]}" %>
+        </div>
+
+        <%= submit_tag "Confirmar", class: "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<br >
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <% if flash[:updated_pass_succes] %>
+    <div class="alert alert-success">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Éxito!</strong> <%= flash[:updated_pass_succes] %>
+    </div>
+    <% end %>
+    <% if flash[:updated_pass_failure] %>
+    <div class="alert alert-danger">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Error!</strong> <%= flash[:updated_pass_failure] %>
+    </div>
+    <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Editar Contraseña</div>
+      <div class="panel-body">
+        <%= form_tag controller: "companies", action: "edit_password", method: "post", :class => "form-signin" do %>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <%= password_field_tag :password, '', class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label>Confirmar contraseña</label>
+          <%= password_field_tag :password_confirmation, '', class: "form-control" %>
+        </div>
+
+        <%= submit_tag "Confirmar", class: "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
 <div class="container">
   <%= link_to "Darse de baja", companies_drop_out_path, class: "btn btn-danger btn-lg btn-block", :data => {:confirm => '¿Esta seguro que desea dar de baja su empresa?'} %>
 </div>

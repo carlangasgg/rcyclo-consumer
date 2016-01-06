@@ -2,9 +2,18 @@ require 'httparty'
 require 'json'
 
 class CompaniesController < ApplicationController
-  before_action :active_company_only, except: [:sign_in, :log_in]
+  before_action :active_company_only, except: [:sign_in, :log_in, :sign_up, :register]
 
   def sign_in
+  end
+
+  def sign_up
+  end
+
+  def register
+    result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/company_auth/', :body => {:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to controller: 'welcome', action: 'index'
   end
 
   def log_in
@@ -25,7 +34,6 @@ class CompaniesController < ApplicationController
 
         redirect_to action: 'sign_in'
     end
-
   end
 
   def log_out
@@ -51,9 +59,30 @@ class CompaniesController < ApplicationController
   def update
   end
 
-  def edit
-    @comp = HTTParty.get('https://api-rcyclo.herokuapp.com/companies/edit', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+  def edit_data
+    company_edit = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:name => params[:name], :email => params[:email], :address => params[:address]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    case establishment_edit.code
+      when 200
+        flash[:updated_data_succes] = "Los datos fueron enviados para su aprobación."
+      else
+        flash[:updated_data_failure] = "Hubo un error en el envío de sus datos."
+      end
+
+      redirect_to :action => 'configuration'
+  end
+
+  def edit_password
+    company_edit_password = HTTParty.put('https://api-rcyclo.herokuapp.com/company_auth/', :body => {:password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    case company_edit_password.code
+      when 200
+        flash[:updated_pass_succes] = "La contraseña fue actualizada."
+      else
+        flash[:updated_pass_failure] = "Hubo un error en la actualización de su contraseña."
+      end
+
+      redirect_to :action => 'configuration'
   end
 
   def destroy
