@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   end
 
   def register
-    result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/company_auth/', :body => {:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/new', :body => {:name => params[:name], :address => params[:address], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
     redirect_to controller: 'welcome', action: 'index'
   end
