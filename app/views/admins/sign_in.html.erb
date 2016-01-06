@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#about">Involucrate</a></li>
+      <li><a href="#about">Quiénes somos</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<% if flash[:wrong_credentials] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-danger">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <strong>¡Error!</strong> <%= flash[:wrong_credentials] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<div>
+  <h1 align="center">Login de Administrador</h1>
+</div>
+<div class="row">
+  <div class="col-md-5"></div>
+  <div class="col-md-2">
+    <%= form_tag controller: "admins", action: "log_in", method: "post", :class => "form-signin" do %>
+      <div class="form-group">
+        <%= text_field_tag :email, '', class: "form-control", placeholder: "Email" %>
+      </div>
+      <div class="form-group">
+        <%= password_field_tag :password, '', class: "form-control", placeholder: "Password" %>
+      </div>
+
+      <%= submit_tag "Iniciar Sesión", class: "btn btn-success btn-lg btn-block" %>
+    <% end %>
+    <hr>
+    
+  </div>
+  <div class="col-md-5"></div>
+</div>
