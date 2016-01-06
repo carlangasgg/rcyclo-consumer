@@ -1,0 +1,109 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <a class="navbar-brand" href="/">Home</a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+      <li><%= link_to "Perfil", establishments_index_path %></li>
+      <li><%= link_to "Contenedores", establishments_containers_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><p class="navbar-text">Conectado como <%= @establishment["email"] %></p></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to "Configuración", establishments_configuration_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Log out", establishments_log_out_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <% if flash[:updated_data_succes] %>
+    <div class="alert alert-success">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Éxito!</strong> <%= flash[:updated_data_succes] %>
+    </div>
+    <% end %>
+    <% if flash[:updated_data_failure] %>
+    <div class="alert alert-danger">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Error!</strong> <%= flash[:updated_data_failure] %>
+    </div>
+    <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Editar Datos</div>
+      <div class="panel-body">
+        <%= form_tag controller: "establishments", action: "edit_data", method: "post", :class => "form-signin" do %>
+        <div class="form-group">
+          <label>Nombre</label>
+          <%= text_field_tag :name, '', class: "form-control", value: "#{@establishment["name"]}" %>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <%= text_field_tag :email, '', class: "form-control", value: "#{@establishment["email"]}" %>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <%= text_field_tag :address, '', class: "form-control", value: "#{@establishment["address"]}" %>
+        </div>
+
+        <%= submit_tag "Confirmar", class: "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<br >
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <% if flash[:updated_pass_succes] %>
+    <div class="alert alert-success">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Éxito!</strong> <%= flash[:updated_pass_succes] %>
+    </div>
+    <% end %>
+    <% if flash[:updated_pass_failure] %>
+    <div class="alert alert-danger">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <strong>¡Error!</strong> <%= flash[:updated_pass_failure] %>
+    </div>
+    <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Editar Contraseña</div>
+      <div class="panel-body">
+        <%= form_tag controller: "establishments", action: "edit_password", method: "post", :class => "form-signin" do %>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <%= password_field_tag :password, '', class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label>Confirmar contraseña</label>
+          <%= password_field_tag :password_confirmation, '', class: "form-control" %>
+        </div>
+
+        <%= submit_tag "Confirmar", class: "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<div class="container">
+  <%= link_to "Darse de baja", establishments_drop_out_path, class: "btn btn-danger btn-lg btn-block", :data => {:confirm => '¿Esta seguro que desea dar de baja su fundación?'} %>
+</div>

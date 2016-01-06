@@ -19,13 +19,16 @@ Rails.application.routes.draw do
   get 'companies/edit'
   post 'companies/modify_data'
 
-
   get 'establishments/index'
   get 'establishments/sign_in'
   post 'establishments/log_in'
   get 'establishments/log_out'
+  get 'establishments/drop_out'
   get 'establishments/containers'
   get 'establishments/accept_container_request'
+  get 'establishments/configuration'
+  post 'establishments/edit_data'
+  post 'establishments/edit_password'
   get 'establishments/update_state_container'
   post 'establishments/delete_container'
 
@@ -39,7 +42,6 @@ Rails.application.routes.draw do
   post 'admins/accept_establishment'
   get 'admins/change_request'
   post 'admins/accept_change_request'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

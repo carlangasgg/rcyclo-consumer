@@ -1,7 +1,6 @@
 class AdminsController < ApplicationController
 	before_action :admin_only, except: [:sign_in, :log_in]
 
-
 	def sign_in
 	end
 
@@ -66,7 +65,7 @@ class AdminsController < ApplicationController
 
 	def new_establishment
 		@ests = HTTParty.get('https://api-rcyclo.herokuapp.com/admins/new_establishment', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
-		
+
 	end
 
 	def accept_establishment

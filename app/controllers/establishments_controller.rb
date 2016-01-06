@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 
 class EstablishmentsController < ApplicationController
-  before_action :establishment_only, except: [:sign_in, :log_in]
+  before_action :active_establishment_only, except: [:sign_in, :log_in]
 
   def sign_in
   end
@@ -50,8 +50,36 @@ class EstablishmentsController < ApplicationController
   def update
   end
 
-  def edit
+  def edit_data
+    establishment_edit = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/update', :body => {:name => params[:name], :email => params[:email], :address => params[:address]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    case establishment_edit.code
+      when 200
+        flash[:updated_data_succes] = "Los datos fueron actualizados."
+      else
+        flash[:updated_data_failure] = "Hubo un error en la actualización de sus datos."
+      end
+
+      redirect_to :action => 'configuration'
+  end
+
+  def edit_password
+    establishment_edit_password = HTTParty.put('https://api-rcyclo.herokuapp.com/establishment_auth/', :body => {:password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    case establishment_edit_password.code
+      when 200
+        flash[:updated_pass_succes] = "La contraseña fue actualizada."
+      else
+        flash[:updated_pass_failure] = "Hubo un error en la actualización de su contraseña."
+      end
+
+      redirect_to :action => 'configuration'
+  end
+
+  def drop_out
+    HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/drop_out', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to controller: 'welcome', action: 'index'
   end
 
   def destroy
@@ -70,17 +98,11 @@ class EstablishmentsController < ApplicationController
     redirect_to :action => 'containers'
   end
 
-  def establishment_only
-    establishment_signed_in = false
-
-    if defined? @@access_token and defined? @@client and defined? @@uid and @@access_token and @@client and @@uid
-      establishment_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
-    end
-
-    unless establishment_signed_in
-      redirect_to root_path
-    end
+  def configuration
+    @establishment = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
+
+
 
   def update_state_container
     HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/update_state_container', :body => {:container_id => params[:container_id], :status_id => params[:status_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
@@ -89,12 +111,23 @@ class EstablishmentsController < ApplicationController
   end
 
   def delete_container
-
     result_delete_container = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/delete_container', :body => {:id_container => params[:id_container]}.to_json,:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
     flash[:container_erased] = "Contenedor eliminado"
     redirect_to :action => 'index'
-
   end
 
+  def active_establishment_only
+    if defined? @@access_token and defined? @@client and defined? @@uid
+      establishment_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    end
+
+    if establishment_signed_in.nil?
+      redirect_to root_path
+    else
+      if establishment_signed_in["active"] == false
+        HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/return_to_rcyclo', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+      end
+    end
+  end
 end
