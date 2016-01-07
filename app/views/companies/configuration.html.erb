@@ -44,7 +44,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">Editar Datos</div>
       <div class="panel-body">
-        <%= form_tag controller: "establishments", action: "edit_data", method: "post", :class => "form-signin" do %>
+        <%= form_tag controller: "companies", action: "edit_data", method: "post", :class => "form-signin" do %>
         <div class="form-group">
           <label>Nombre</label>
           <%= text_field_tag :name, '', class: "form-control", value: "#{@company["name"]}" %>
