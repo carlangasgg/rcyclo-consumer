@@ -3,7 +3,7 @@ require 'json'
 
 class CompaniesController < ApplicationController
   before_action :not_erased_company_only, except: [:sign_in, :log_in, :sign_up, :register]
-  before_action :active_company_only, except: [:sign_in, :log_in]
+  before_action :active_company_only, except: [:sign_in, :log_in, :sign_up, :register]
 
   def active_company_only
     if defined? @@access_token and defined? @@client and defined? @@uid
