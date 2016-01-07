@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
+  <a class="navbar-brand" href="/admins/index"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
       <li><%#= link_to "Perfil", companies_index_path %></li>
@@ -19,13 +19,26 @@
         <ul class="dropdown-menu" role="menu">
           <li><%#= link_to "Configuración", companies_configuration_path %></li>
           <li class="divider"></li>
-          <li><%= link_to "Log out", admins_log_out_path %></li>
+          <li><%= link_to "Cerrar sesión", admins_log_out_path %></li>
         </ul>
       </li>
     </ul>
   </div>
 </nav>
 
+<% if flash[:update_accept] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-info">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:update_accept] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<br>
 
 <div class="container">
   <div class="row">
@@ -44,50 +57,46 @@
         <div class="panel-heading">Listados de Peticiones de Cambio</div>
         
 
-      <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre(Actual)</th>
-                    <th>Nombre(Nuevo)</th>
-                    <th>Email(Actual)</th>
-                    <th>Email(Nuevo)</th>
-                    <th>Direccion(Actual)</th>
-                    <th>Direccion(Nueva)</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre(Actual)</th>
+                        <th>Nombre(Nuevo)</th>
+                        <th>Email(Actual)</th>
+                        <th>Email(Nuevo)</th>
+                        <th>Direccion(Actual)</th>
+                        <th>Direccion(Nueva)</th>
+                        <th></th>
 
-              <%@change["change"].each_with_index do |chan,index|%>
-              
-                <tr>
-                    <td><%= index+1 %></td>
-                    <td><%= @change["comp"][index]["name"]%></td>
-                    <td><%= chan["name"]%></td>
-                    <td><%= @change["comp"][index]["email"]%></td>
-                    <td><%= chan["email"]%></td>
-                    <td><%= @change["comp"][index]["address"]%></td>
-                    <td><%= chan["address"]%></td>
-                    <td><%= link_to 'Aceptar', admins_accept_change_request_path(:change_id => chan["id"]), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-success btn-md", method: :post %></td>
-                    <td></td>
-                </tr>
+                    </tr>
+                </thead>
+                <tbody>
 
-              <%end%>
-            </tbody>
-        </table>
+                  <%@change["change"].each_with_index do |chan,index|%>
+                  
+                    <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= @change["comp"][index]["name"]%></td>
+                        <td><%= chan["name"]%></td>
+                        <td><%= @change["comp"][index]["email"]%></td>
+                        <td><%= chan["email"]%></td>
+                        <td><%= @change["comp"][index]["address"]%></td>
+                        <td><%= chan["address"]%></td>
+                        <td><%= link_to 'Aceptar', admins_accept_change_request_path(:change_id => chan["id"]), :data => {:confirm => '¿Está seguro que desea actualizar este registro?'}, :class => "btn btn-success btn-md", method: :post %></td>
+
+                    </tr>
+
+                  <%end%>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
     </div>
-  </div>
-
-
-
-
-    </div>
-
-    
-  </div>
   
-
-</div>
+    <div class="col-sm-2 col-sm-offset-10"><%= link_to "Inicio", admins_index_path, class: "  btn btn-default btn-lg btn-block" %>
+    </div>
+  </div>

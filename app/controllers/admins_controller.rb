@@ -85,6 +85,7 @@ class AdminsController < ApplicationController
 	def accept_change_request
 		HTTParty.get('https://api-rcyclo.herokuapp.com/admins/accept_change_request', :body => {:change_id => params[:change_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+		flash[:update_accept] = "Datos actualizados correctamente."
     	redirect_to action: 'change_request'
 	end
 
