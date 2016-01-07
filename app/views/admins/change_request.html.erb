@@ -13,7 +13,7 @@
       <li><%#= link_to "Contenedores", companies_containers_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><p class="navbar-text">Conectado como <%= @comps["current_admin"]["email"] %></p></li>
+      <li><p class="navbar-text">Conectado como <%= @change["current_admin"]["email"] %></p></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
@@ -31,7 +31,7 @@
   <div class="row">
     <div class="col-md-12">
 
-    <h1 align="center">Validación de Peticiones de Cambio de Compañias</h1>
+    <h1 align="center">Validación Cambios de datos de Compañias</h1>
     </div>
   </div>
   <hr>
@@ -49,23 +49,29 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Direccion</th>
+                    <th>Nombre(Actual)</th>
+                    <th>Nombre(Nuevo)</th>
+                    <th>Email(Actual)</th>
+                    <th>Email(Nuevo)</th>
+                    <th>Direccion(Actual)</th>
+                    <th>Direccion(Nueva)</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
 
-              <%@comps["comps"].each_with_index do |comp,index|%>
+              <%@change["change"].each_with_index do |chan,index|%>
               
                 <tr>
                     <td><%= index+1 %></td>
-                    <td><%= comp["name"]%></td>
-                    <td><%= comp["email"]%></td>
-                    <td><%= comp["address"]%></td>
-                    <td><%= link_to 'Aceptar', admins_accept_company_path(:comp_id => comp["id"]), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-success btn-md", method: :post %></td>
+                    <td><%= @change["comp"][index]["name"]%></td>
+                    <td><%= chan["name"]%></td>
+                    <td><%= @change["comp"][index]["email"]%></td>
+                    <td><%= chan["email"]%></td>
+                    <td><%= @change["comp"][index]["address"]%></td>
+                    <td><%= chan["address"]%></td>
+                    <td><%= link_to 'Aceptar', admins_accept_change_request_path(:change_id => chan["id"]), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-success btn-md", method: :post %></td>
                     <td></td>
                 </tr>
 
