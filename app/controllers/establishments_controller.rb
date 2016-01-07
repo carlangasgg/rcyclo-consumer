@@ -2,9 +2,29 @@ require 'httparty'
 require 'json'
 
 class EstablishmentsController < ApplicationController
+  before_action :not_erased_establishment_only, except: [:sign_in, :log_in, :sign_up, :register]
   before_action :active_establishment_only, except: [:sign_in, :log_in]
 
+  def active_establishment_only
+    if defined? @@access_token and defined? @@client and defined? @@uid
+      establishment_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    end
+
+    if establishment_signed_in.nil? or establishment_signed_in["active"] == false
+      redirect_to root_path
+    end
+  end
+
   def sign_in
+  end
+
+  def sign_up
+  end
+
+  def register
+    result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/new', :body => {:name => params[:name], :address => params[:address], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    redirect_to controller: 'welcome', action: 'index'
   end
 
   def log_in
@@ -117,7 +137,7 @@ class EstablishmentsController < ApplicationController
     redirect_to :action => 'index'
   end
 
-  def active_establishment_only
+  def not_erased_establishment_only
     if defined? @@access_token and defined? @@client and defined? @@uid
       establishment_signed_in = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/signed_in', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
     end
@@ -125,7 +145,7 @@ class EstablishmentsController < ApplicationController
     if establishment_signed_in.nil?
       redirect_to root_path
     else
-      if establishment_signed_in["active"] == false
+      if establishment_signed_in["erased"] == false
         HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/return_to_rcyclo', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
       end
     end

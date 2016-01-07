@@ -23,30 +23,33 @@
       <div class="alert alert-danger">
           <a class="close" data-dismiss="alert">&times;</a>
           <strong>¡Error!</strong> <%= flash[:wrong_credentials] %>
-      </div>
+      </div><br>
     </div>
     <div class="col-md-4"></div>
   </end>
 <% end %>
-<div>
-  <h1 align="center">Regístrate como Empresa</h1>
-</div>
-<div class="row">
-  <div class="col-md-5"></div>
-  <div class="col-md-2">
-    <%= form_tag controller: "companies", action: "log_in", method: "post", :class => "form-signin" do %>
-      <div class="form-group">
-        <%= text_field_tag :email, '', class: "form-control", placeholder: "Email" %>
-      </div>
-      <div class="form-group">
-        <%= password_field_tag :password, '', class: "form-control", placeholder: "Password" %>
-      </div>
-
-      <%= submit_tag "Iniciar Sesión", class: "btn btn-success btn-lg btn-block" %>
-    <% end %>
-    <hr>
-    <span><a href="#">Need help?</a></span>
-    <span class="pull-right"><a href="#">New Registration</a></span>
+<br><br><br><br>
+<div class="container">
+  <div>
+    <h1 align="center">Inicia sesión como Empresa</h1>
   </div>
-  <div class="col-md-5"></div>
+  <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+      <%= form_tag controller: "companies", action: "log_in", method: "post", :class => "form-signin" do %>
+        <div class="form-group">
+          <%= text_field_tag :email, '', class: "form-control", placeholder: "Email" %>
+        </div>
+        <div class="form-group">
+          <%= password_field_tag :password, '', class: "form-control", placeholder: "Password" %>
+        </div>
+
+        <%= submit_tag "Iniciar Sesión", class: "btn btn-success btn-lg btn-block" %>
+      <% end %>
+      <hr>
+      <span><a href="#">Need help?</a></span>
+      <span class="pull-right"><a href="#">New Registration</a></span>
+    </div>
+    <div class="col-md-5"></div>
+  </div>
 </div>
