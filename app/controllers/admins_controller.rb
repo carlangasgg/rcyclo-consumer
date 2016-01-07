@@ -61,6 +61,7 @@ class AdminsController < ApplicationController
 	def accept_company
 		HTTParty.get('https://api-rcyclo.herokuapp.com/admins/accept_company', :body => {:comp_id => params[:comp_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    	flash[:company_accept] = "Empresa validada exitosamente."
     	redirect_to action: 'new_company'
 	end
 
@@ -72,6 +73,7 @@ class AdminsController < ApplicationController
 	def accept_establishment
 		HTTParty.get('https://api-rcyclo.herokuapp.com/admins/accept_establishment', :body => {:est_id => params[:est_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    	flash[:establishment_accept] = "Institución validada exitosamente."
     	redirect_to action: 'new_establishment'
 	end
 

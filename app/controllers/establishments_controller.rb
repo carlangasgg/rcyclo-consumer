@@ -25,7 +25,7 @@ class EstablishmentsController < ApplicationController
   def register
     result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/new', :body => {:name => params[:name], :address => params[:address], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    flash[:establishment_validate] = "Solicitud enviada. Espere la validación de administración"
+    flash[:establishment_validate] = "Solicitud enviada. Espere la validación de administración vía email."
     redirect_to controller: 'welcome', action: 'index'
   end
 
@@ -103,6 +103,7 @@ class EstablishmentsController < ApplicationController
   def drop_out
     HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/drop_out', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    flash[:dropout] = "Haz sido dado de baja. Para reactivar tu cuenta, inicia sesión."
     redirect_to controller: 'welcome', action: 'index'
   end
 
@@ -119,6 +120,7 @@ class EstablishmentsController < ApplicationController
   def accept_container_request
     HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/accept_container_request', :body => {:container_id => params[:container_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    flash[:container_succes] = "Contenedor validado exitosamente."
     redirect_to :action => 'containers'
   end
 
@@ -137,7 +139,7 @@ class EstablishmentsController < ApplicationController
   def delete_container
     result_delete_container = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/delete_container', :body => {:id_container => params[:id_container]}.to_json,:headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    flash[:container_erased] = "Contenedor eliminado"
+    flash[:container_erased] = "Contenedor eliminado."
     redirect_to :action => 'index'
   end
 
