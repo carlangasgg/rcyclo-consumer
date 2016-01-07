@@ -14,7 +14,14 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><p class="navbar-text">Conectado como <%= @data["current_establishment"]["email"] %></p></li>
-      <li><%= link_to "Log out", establishments_log_out_path %></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to "Configuración", establishments_configuration_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Log out", establishments_log_out_path %></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>
@@ -54,7 +61,6 @@
                   <th>#</th>
                   <th>Título</th>
                   <th>Dirección</th>
-                  <th>Descripción</th>
                   <th>Última modificación</th>
                   <th>Modificar estado</th>
                   <th></th>
@@ -66,7 +72,6 @@
                   <td><%= index + 1 %> </td>
                   <td><%= cont["title"] %></td>
                   <td><%= cont["address"] %></td>
-                  <td><%= cont["description"] %></td>
                   <td><%= cont["updated_at"] %></td>
                   <td>
                     <div class="dropdown">
@@ -118,7 +123,7 @@
                   <td><%= cont["title"] %></td>
                   <td><%= cont["address"] %></td>
                   <td><%= link_to "Aceptar", establishments_accept_container_request_path(:container_id => cont["id"]) %></td>
-                  
+
                 </tr>
                 <% end %>
               </tbody>

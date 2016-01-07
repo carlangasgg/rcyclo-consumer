@@ -27,15 +27,14 @@
     </div>
     <div class="col-md-4"></div>
   </end>
-<% end -%>
+<% end %>
 <div>
-  <h1 align="center">Regístrate como Institución</h1>
+  <h1 align="center">Login de Administrador</h1>
 </div>
-
 <div class="row">
   <div class="col-md-5"></div>
   <div class="col-md-2">
-    <%= form_tag controller: "establishments", action: "log_in", method: "post", :class => "form-signin" do %>
+    <%= form_tag controller: "admins", action: "log_in", method: "post", :class => "form-signin" do %>
       <div class="form-group">
         <%= text_field_tag :email, '', class: "form-control", placeholder: "Email" %>
       </div>
@@ -46,8 +45,7 @@
       <%= submit_tag "Iniciar Sesión", class: "btn btn-success btn-lg btn-block" %>
     <% end %>
     <hr>
-    <span><a href="#">Need help?</a></span>
-    <span class="pull-right"><a href="#">New Registration</a></span>
+    
   </div>
   <div class="col-md-5"></div>
 </div>
