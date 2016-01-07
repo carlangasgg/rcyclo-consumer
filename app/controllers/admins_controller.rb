@@ -31,6 +31,7 @@ class AdminsController < ApplicationController
 		@@client = nil
 		@@uid = nil
 
+		flash[:adm_notice] = "Desconectado con éxito"
 		redirect_to controller: 'welcome', action: 'index'
 	end
 

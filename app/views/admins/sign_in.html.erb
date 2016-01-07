@@ -29,11 +29,12 @@
   </end>
 <% end %>
 <div>
+<br><br><br><br>
   <h1 align="center">Login de Administrador</h1>
 </div>
 <div class="row">
-  <div class="col-md-5"></div>
-  <div class="col-md-2">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
     <%= form_tag controller: "admins", action: "log_in", method: "post", :class => "form-signin" do %>
       <div class="form-group">
         <%= text_field_tag :email, '', class: "form-control", placeholder: "Email" %>
