@@ -77,7 +77,7 @@ class CompaniesController < ApplicationController
   def edit_data
     company_edit = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/modify_data', :body => {:name => params[:name], :email => params[:email], :address => params[:address]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    case establishment_edit.code
+    case company_edit.code
       when 200
         flash[:updated_data_succes] = "Los datos fueron enviados para su aprobación."
       else
