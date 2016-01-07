@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
+  <a class="navbar-brand" href="/companies/index"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
       <li><%= link_to "Perfil", companies_index_path %></li>
@@ -19,7 +19,7 @@
         <ul class="dropdown-menu" role="menu">
           <li><%= link_to "Configuración", companies_configuration_path %></li>
           <li class="divider"></li>
-          <li><%= link_to "Log out", companies_log_out_path %></li>
+          <li><%= link_to "Cerrar sesión  ", companies_log_out_path %></li>
         </ul>
       </li>
     </ul>
@@ -105,5 +105,7 @@
 </div>
 
 <div class="container">
-  <%= link_to "Darse de baja", companies_drop_out_path, class: "btn btn-danger btn-lg btn-block", :data => {:confirm => '¿Esta seguro que desea dar de baja su empresa?'} %>
+  <div class="col-lg-4 col-lg-offset-4">
+    <%= link_to "Darse de baja", companies_drop_out_path, class: "btn btn-danger btn-lg btn-block", :data => {:confirm => '¿Esta seguro que desea dar de baja su empresa?'} %>
+  </div>  
 </div>

@@ -6,27 +6,75 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
+  <a class="navbar-brand container-fluid" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Involucrate</a></li>
-      <li><a href="#about">Quiénes somos</a></li>
-      <li><a href="#contact">Contacto</a></li>
+      <li><%= link_to "Regístrate como empresa", companies_sign_up_path %></li>
+      <li><%= link_to "Regístrate como institución", establishments_sign_up_path %></li>
     </ul>
   </div>
 </nav>
-<% if flash[:notice] %>
+<% if flash[:comp_notice] %>
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="alert alert-info">
           <a class="close" data-dismiss="alert">&times;</a>
-          <!--<strong>Aviso</strong>--> <%= flash[:notice] %>
+          <!--<strong>Aviso</strong>--> <%= flash[:comp_notice] %>
       </div>
     </div>
     <div class="col-md-4"></div>
   </end>
 <% end %>
+<% if flash[:adm_notice] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-info">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:adm_notice] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<% if flash[:est_notice] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-info">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:est_notice] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<% if flash[:establishment_validate] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-success">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:establishment_validate] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<% if flash[:company_validate] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-success">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:company_validate] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+
 <br><br><br>
 <div class="container-full">
   <div class="row">

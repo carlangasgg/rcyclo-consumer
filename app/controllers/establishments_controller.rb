@@ -3,7 +3,8 @@ require 'json'
 
 class EstablishmentsController < ApplicationController
   before_action :not_erased_establishment_only, except: [:sign_in, :log_in, :sign_up, :register]
-  before_action :active_establishment_only, except: [:sign_in, :log_in]
+  before_action :active_establishment_only, except: [:sign_in, :log_in, :sign_up, :register]
+  
 
   def active_establishment_only
     if defined? @@access_token and defined? @@client and defined? @@uid
@@ -24,6 +25,7 @@ class EstablishmentsController < ApplicationController
   def register
     result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/establishments/new', :body => {:name => params[:name], :address => params[:address], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    flash[:establishment_validate] = "Solicitud enviada. Espere la validación de administración"
     redirect_to controller: 'welcome', action: 'index'
   end
 
@@ -54,11 +56,13 @@ class EstablishmentsController < ApplicationController
     @@client = nil
     @@uid = nil
 
+    flash[:est_notice] = "Desconectado con éxito"
     redirect_to controller: 'welcome', action: 'index'
   end
 
   def index
     @establishment = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    @data = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/containers', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
   end
 
   def new

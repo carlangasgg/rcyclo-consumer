@@ -9,9 +9,7 @@
   <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Involucrate</a></li>
-      <li><a href="#about">Quiénes somos</a></li>
-      <li><a href="#contact">Contacto</a></li>
+      <li><a href="/">Inicio</a></li>
     </ul>
   </div>
 </nav>
@@ -34,21 +32,20 @@
     <h1 align="center">Inicia sesión como Empresa</h1>
   </div>
   <div class="row">
-    <div class="col-md-5"></div>
-    <div class="col-md-2">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
       <%= form_tag controller: "companies", action: "log_in", method: "post", :class => "form-signin" do %>
         <div class="form-group">
           <%= text_field_tag :email, '', class: "form-control", placeholder: "Email" %>
         </div>
         <div class="form-group">
-          <%= password_field_tag :password, '', class: "form-control", placeholder: "Password" %>
+          <%= password_field_tag :password, '', class: "form-control", placeholder: "Contraseña" %>
         </div>
 
         <%= submit_tag "Iniciar Sesión", class: "btn btn-success btn-lg btn-block" %>
       <% end %>
       <hr>
-      <span><a href="#">Need help?</a></span>
-      <span class="pull-right"><a href="#">New Registration</a></span>
+      <span><%= link_to "Regístrate", companies_sign_up_path, class: "btn btn-link btn-lg btn-block" %></span>
     </div>
     <div class="col-md-5"></div>
   </div>

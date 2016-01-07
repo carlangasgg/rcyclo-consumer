@@ -24,6 +24,7 @@ class CompaniesController < ApplicationController
   def register
     result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/new', :body => {:name => params[:name], :address => params[:address], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    flash[:company_validate] = "Solicitud enviada. Espere la validación de administración"
     redirect_to controller: 'welcome', action: 'index'
   end
 
@@ -54,7 +55,7 @@ class CompaniesController < ApplicationController
     @@client = nil
     @@uid = nil
 
-    flash[:notice] = "Desconectado con éxito"
+    flash[:comp_notice] = "Desconectado con éxito"
     redirect_to controller: 'welcome', action: 'index'
   end
 
