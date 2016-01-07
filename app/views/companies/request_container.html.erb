@@ -20,7 +20,7 @@
           <li><%= link_to "Configuración", companies_configuration_path %></li>
           <li><%= link_to "Editar datos", companies_edit_path %></li>
           <li class="divider"></li>
-          <li><%= link_to "Log out", companies_log_out_path %></li>
+          <li><%= link_to "Cerrar sesión", companies_log_out_path %></li>
         </ul>
       </li>
     </ul>
@@ -29,6 +29,7 @@
 
 <div class="container">
   <h1>Tipos de desechos</h1>
+    <div class="col-sm-2 col-sm-offset-10"><%= link_to "Cancelar", companies_index_path, class: "  btn btn-default btn-lg btn-block" %></div> <br><br>
 
   <hr>
 
