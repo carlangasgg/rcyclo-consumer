@@ -149,7 +149,7 @@ class EstablishmentsController < ApplicationController
     if establishment_signed_in.nil?
       redirect_to root_path
     else
-      if establishment_signed_in["erased"] == false
+      if establishment_signed_in["erased"] == true
         HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/return_to_rcyclo', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
       end
     end
