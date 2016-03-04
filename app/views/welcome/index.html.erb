@@ -74,6 +74,18 @@
     <div class="col-md-4"></div>
   </end>
 <% end %>
+<% if flash[:dropout] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-success">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:dropout] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
 
 <br><br><br>
 <div class="container-full">

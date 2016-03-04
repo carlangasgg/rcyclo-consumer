@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <a class="navbar-brand" href="/"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
+  <a class="navbar-brand" href="/admins/index"> <%=image_tag("icono.png", :alt => "icono", :title => "Inicio", width: "60") %></a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
       <li><%#= link_to "Perfil", companies_index_path %></li>
@@ -25,6 +25,19 @@
     </ul>
   </div>
 </nav>
+<% if flash[:establishment_accept] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-info">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <!--<strong>Aviso</strong>--> <%= flash[:establishment_accept] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<br>
 
 
 <div class="container">
@@ -65,7 +78,7 @@
                     <td><%= est["name"]%></td>
                     <td><%= est["email"]%></td>
                     <td><%= est["address"]%></td>
-                    <td><%= link_to 'Aceptar', admins_accept_establishment_path(:est_id => est["id"]), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-success btn-md", method: :post %></td>
+                    <td><%= link_to 'Aceptar', admins_accept_establishment_path(:est_id => est["id"]), :data => {:confirm => '¿Está seguro que desea aceptar esta institución?'}, :class => "btn btn-success btn-md", method: :post %></td>
                     <td></td>
                 </tr>
 
@@ -82,6 +95,7 @@
 
     
   </div>
-  
+  <div class="col-sm-2 col-sm-offset-10"><%= link_to "Inicio", admins_index_path, class: "  btn btn-default btn-lg btn-block" %>
+  </div>  
 
 </div>

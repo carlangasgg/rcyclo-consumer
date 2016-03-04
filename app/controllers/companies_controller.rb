@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
   def register
     result_register = HTTParty.post('https://api-rcyclo.herokuapp.com/companies/new', :body => {:name => params[:name], :address => params[:address], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation]}.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    flash[:company_validate] = "Solicitud enviada. Espere la validación de administración"
+    flash[:company_validate] = "Solicitud enviada. Espere la validación de administración vía email."
     redirect_to controller: 'welcome', action: 'index'
   end
 
@@ -120,7 +120,7 @@ class CompaniesController < ApplicationController
   def request_container_last_step
     HTTParty.get('https://api-rcyclo.herokuapp.com/companies/create_container_by_company_request', :body => {:establishment_id => params[:establishment_id], :waste_type_id => params[:waste_type_id]}.to_json, :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
-    flash[:success] = "Contenedor solicitado. Espere confirmación"
+    flash[:success] = "Contenedor solicitado. Espere confirmación de la institución."
     redirect_to action: 'containers'
   end
 
@@ -137,6 +137,7 @@ class CompaniesController < ApplicationController
   def drop_out
     HTTParty.get('https://api-rcyclo.herokuapp.com/companies/drop_out', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
 
+    flash[:dropout] = "Haz sido dado de baja. Para reactivar tu cuenta, inicia sesión."
     redirect_to controller: 'welcome', action: 'index'
   end
 

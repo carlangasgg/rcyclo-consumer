@@ -71,6 +71,20 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCcnfjpcjMkyHuFtLsfOAsS8jgIPkMzCw&callback=initMap" async defer></script>
 
+<% if flash[:container_succes] %>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="alert alert-success">
+          <a class="close" data-dismiss="alert">&times;</a>
+          <%= flash[:container_succes] %>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </end>
+<% end %>
+<br><br><br>
+
 <div class="container">
   <h1>Contenedores</h1>
   <div class="col-sm-2 col-sm-offset-10"><%= link_to "Inicio", establishments_index_path, class: "btn btn-default btn-lg btn-block" %></div> <br><br>
@@ -84,7 +98,7 @@
 
       <ul class="list-group">
         <li class="list-group-item text-muted">Resumen</i></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Totales</strong></span> <%= @data["containers_empty"] + @data["containers_half"] + @data["containers_full"] %></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Total</strong></span> <%= @data["containers_empty"] + @data["containers_half"] + @data["containers_full"] %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Llenos</strong></span> <%= @data["containers_full"] %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Medios</strong></span> <%= @data["containers_half"] %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Vacios</strong></span> <%= @data["containers_empty"] %></li>
@@ -142,7 +156,7 @@
                     </div>
                   </td>
                   <td>
-                    <%= link_to 'Eliminar', establishments_delete_container_path(:id_container => cont["id"]), :data => {:confirm => '¿Esta seguro que desea eliminar este contenedor?'}, :class => "btn btn-danger btn-sm", method: :post %>
+                    <%= link_to 'Eliminar', establishments_delete_container_path(:id_container => cont["id"]), :data => {:confirm => '¿Está seguro que desea eliminar este contenedor?'}, :class => "btn btn-danger btn-sm", method: :post %>
                   </td>
                 </tr>
                 <% end %>
