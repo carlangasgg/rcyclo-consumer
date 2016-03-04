@@ -26,9 +26,54 @@
   </div>
 </nav>
 
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #map {
+    height: 100%;
+  }
+</style>
+
+<div class="col-xs-8 col-xs-offset-2">
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+</div>
+
+<script>
+  var map;
+  function initMap() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: position.coords.latitude, lng: position.coords.longitude},
+          zoom: 8
+        })
+
+        // para cada @data["containers"] crear un marcador con su titulo, longitud y latitud
+
+        var containers = <%= raw @data["containers"].to_json %>
+
+        for (i = 0; i < containers.length; i++) {
+          var marker = new google.maps.Marker({
+            position: {lat: containers[i].latitude, lng: containers[i].longitude},
+            map: map,
+            title: containers[i].title
+          })
+        }
+      });
+    }
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCcnfjpcjMkyHuFtLsfOAsS8jgIPkMzCw&callback=initMap" async defer></script>
+
 <div class="container">
   <h1>Contenedores</h1>
-  <div class="col-sm-2 col-sm-offset-10"><%= link_to "Inicio", establishments_index_path, class: "  btn btn-default btn-lg btn-block" %></div> <br><br>
+  <div class="col-sm-2 col-sm-offset-10"><%= link_to "Inicio", establishments_index_path, class: "btn btn-default btn-lg btn-block" %></div> <br><br>
 
   <hr>
 

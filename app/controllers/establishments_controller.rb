@@ -4,7 +4,7 @@ require 'json'
 class EstablishmentsController < ApplicationController
   before_action :not_erased_establishment_only, except: [:sign_in, :log_in, :sign_up, :register]
   before_action :active_establishment_only, except: [:sign_in, :log_in, :sign_up, :register]
-  
+
 
   def active_establishment_only
     if defined? @@access_token and defined? @@client and defined? @@uid
@@ -62,7 +62,9 @@ class EstablishmentsController < ApplicationController
 
   def index
     @establishment = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/index', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    puts "ESTABLISHMENT: " + @establishment.to_s
     @data = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/containers', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+    puts "DATA: " + @data.to_s
   end
 
   def new
