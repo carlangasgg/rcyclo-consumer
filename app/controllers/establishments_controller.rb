@@ -117,6 +117,36 @@ class EstablishmentsController < ApplicationController
 
   def containers
     @data = HTTParty.get('https://api-rcyclo.herokuapp.com/establishments/containers', :headers => {"access-token" => @@access_token, "client" => @@client, "uid" => @@uid, 'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+
+    @companies = []
+    companies_id = []
+
+    unique_containers = @data["containers"].uniq { |c| c["company_id"] }.each_with_index do |c, index|
+      companies_id[index] = c["company_id"]
+      @companies[index] = [c["company_id"], c["title"].split(' - ')[-1].split(' | ')[0], 0, 0, 0, 0, c["latitude"], c["longitude"]]
+    end
+
+    indice = 0
+
+    @data["containers"].each do |c|
+      companies_id.each_with_index do |comp, index|
+        if (comp == c["company_id"])
+          indice = index  # en index capturo el indice de @companies sobre la que estamos trabajando
+        end
+      end
+
+        @companies[indice][2] += 1
+
+      if c["status_id"] == 3
+        @companies[indice][5] += 1
+      end
+      if c["status_id"] == 2
+        @companies[indice][4] += 1
+      end
+      if c["status_id"] == 1
+        @companies[indice][3] += 1
+      end
+    end
   end
 
   def accept_container_request

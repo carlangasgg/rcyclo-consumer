@@ -1,3 +1,10 @@
+<%= @companies %>
+
+<br>
+<br>
+
+<%= @data %>
+
 <nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,15 +62,28 @@
 
         // para cada @data["containers"] crear un marcador con su titulo, longitud y latitud
 
-        var containers = <%= raw @data["containers"].to_json %>
+        var companies = <%= raw @companies.to_json %>
 
-        for (i = 0; i < containers.length; i++) {
+        console.log(companies)
+
+        for (i = 0; i < companies.length; i++) {
+          var icon;
+          if (companies[i][4] >= companies[i][2] * 0.5)
+            icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+          else if (companies[i][3] >= companies[i][2] * 0.8)
+            icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+          else
+            icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+
           var marker = new google.maps.Marker({
-            position: {lat: containers[i].latitude, lng: containers[i].longitude},
+            position: {lat: companies[i][6], lng: companies[i][7]},
             map: map,
-            title: containers[i].title
+            title: companies[i][1],
+            icon: icon
           })
         }
+
+        console.log(companies)
       });
     }
   }
